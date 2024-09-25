@@ -1,3 +1,4 @@
+import { orderController } from "../../interface/orderController";
 import RabbitMQConfig from "../config/rabbitMQ";
  import  RabbitMQClient from './client'
 
@@ -7,9 +8,9 @@ export default class MessageHandlers{
 
         switch(operations){
             case 'create_order':
-                console.log("creating order");
-                
-                break
+                console.log("creating stripe payment session");
+                response = await orderController.createStripeSession(data)
+                break;             
         }
         await RabbitMQClient.produce(response,correlationId,replyTo)
     }
