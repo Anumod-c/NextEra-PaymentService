@@ -29,8 +29,9 @@ export class OrderService {
                             product_data: {
                                 name: orderData.title,
                                 images: [orderData.thumbnail],
+                                
                             },
-                            unit_amount: parseInt(orderData.price) * 100, // Assuming price is in dollars
+                            unit_amount: parseInt(orderData.discountPrice) * 100, // Assuming price is in dollars
                         },
                         quantity: 1,
                     },

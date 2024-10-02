@@ -2,6 +2,7 @@ export interface IOrder {
     tutorId: string;
     userId: string;
     price: string;
+    discountPrice:string;
     adminShare: string;
     tutorShare: string;
     paymentStatus: boolean;
