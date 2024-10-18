@@ -12,6 +12,10 @@ const OrderSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  adminId:{
+    type:String,
+    requird:true,
+  },
   tutorId: {
     type: String,
     required: true,
@@ -31,6 +35,10 @@ const OrderSchema: Schema = new Schema({
   price: {
     type: String,
     required: true,
+  },
+  discountPrice:{
+    type:String,
+    required:true,
   },
   adminShare: {
     type: String,

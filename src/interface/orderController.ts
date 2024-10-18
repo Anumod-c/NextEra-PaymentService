@@ -34,12 +34,28 @@ class OrderController {
             return { success: false, message: "An error occurred while saving the order." };
         }
     }
-    async payouts(tutorId:string){
+    async tutorPayouts(tutorId:string){
         try {
-            const result = await this.orderService.payouts(tutorId);
+            const result = await this.orderService.tutorpayouts(tutorId);
             return result
         } catch (error) {
             console.log("Error inn fetching the tutor payouts")
+        }
+    }
+    async adminPayouts(){
+        try {
+            const result = await this.orderService.adminPayouts();
+            return result
+        } catch (error) {
+            console.log("Error inn fetching the admin payouts")
+        }
+    }
+    async AdminPayoutsByMonth(){
+        try {
+            const result = await this.orderService.AdminPayoutsByMonth();
+            return result;
+        } catch (error) {
+            console.log("Error in fetching AdminPayoutsByMonth",error)
         }
     }
 }

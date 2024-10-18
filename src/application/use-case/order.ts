@@ -44,12 +44,12 @@ export class OrderService {
             
             // Save the order in the database
            
-            const priceAsNumber = parseFloat(orderData.price);
+            const priceAsNumber = parseFloat(orderData.discountPrice);
 
             orderData.transactionId=session.id
             orderData.paymentStatus=true
-            orderData.adminShare=( priceAsNumber*0.10).toString();
-            orderData.tutorShare= (priceAsNumber*0.90).toString();
+            orderData.adminShare=( priceAsNumber*0.10).toFixed(2).toString();
+            orderData.tutorShare= (priceAsNumber*0.90).toFixed(2).toString();
             console.log('hyyy',orderData)
 
             return {
@@ -77,7 +77,7 @@ export class OrderService {
             return { success: false, message: "Failed to save the order." };
         }
     }
-    async payouts(tutorId:string){
+    async tutorpayouts(tutorId:string){
         try{
             const result=await this.orderRepo.fetchTutorPayouts(tutorId);
             return result
@@ -85,6 +85,24 @@ export class OrderService {
             console.log("Error in fetchihg the tutor payouts in usecase")
             return { success: false, message: "Failed to fetch the payouts." };
 
+        }
+    }
+    async adminPayouts(){
+        try{
+            const result=await this.orderRepo.fetchAdminPayouts();
+            return result
+        }catch(error){
+            console.log("Error in fetchihg the admin payouts in usecase")
+            return { success: false, message: "Failed to fetch the payouts." };
+
+        }
+    }
+    async AdminPayoutsByMonth(){
+        try {
+            const result = await this.orderRepo.getAdminPayoutsByMonth();
+            return result
+        } catch (error) {
+            console.log("Error in fetching AdminPayoutsByMonth  in orderService",error)
         }
     }
 }

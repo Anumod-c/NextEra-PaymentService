@@ -1,6 +1,7 @@
 export interface IOrder {
     tutorId: string;
     userId: string;
+    adminId: string;
     price: string;
     discountPrice:string;
     adminShare: string;
