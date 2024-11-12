@@ -21,7 +21,7 @@ export default class MessageHandlers {
                 break;
             case 'admin_payout':
                 console.log('fetching admin payouts');
-                response = await orderController.adminPayouts();
+                response = await orderController.adminPayouts(data);
                 break;
             case 'AdminPayoutsByMonth':
                 response = await orderController.AdminPayoutsByMonth();

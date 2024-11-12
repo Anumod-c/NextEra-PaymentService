@@ -77,9 +77,9 @@ export class OrderService {
             return { success: false, message: "Failed to save the order." };
         }
     }
-    async tutorpayouts(tutorId:string){
+    async tutorpayouts(tutorId: string, page: number = 1, limit: number){
         try{
-            const result=await this.orderRepo.fetchTutorPayouts(tutorId);
+            const result=await this.orderRepo.fetchTutorPayouts(tutorId,page,limit);
             return result
         }catch(error){
             console.log("Error in fetchihg the tutor payouts in usecase")
@@ -87,9 +87,9 @@ export class OrderService {
 
         }
     }
-    async adminPayouts(){
+    async adminPayouts(page: number = 1, limit: number){
         try{
-            const result=await this.orderRepo.fetchAdminPayouts();
+            const result=await this.orderRepo.fetchAdminPayouts(page,limit);
             return result
         }catch(error){
             console.log("Error in fetchihg the admin payouts in usecase")

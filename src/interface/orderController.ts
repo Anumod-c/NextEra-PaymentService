@@ -34,17 +34,20 @@ class OrderController {
             return { success: false, message: "An error occurred while saving the order." };
         }
     }
-    async tutorPayouts(tutorId:string){
+    async tutorPayouts(data: { tutorId: string, page: number, limit: number }){
         try {
-            const result = await this.orderService.tutorpayouts(tutorId);
+            const { tutorId, page, limit } = data;
+            const result = await this.orderService.tutorpayouts(tutorId, page, limit);
             return result
         } catch (error) {
             console.log("Error inn fetching the tutor payouts")
         }
     }
-    async adminPayouts(){
+    async adminPayouts(data: {  page: number, limit: number }){
         try {
-            const result = await this.orderService.adminPayouts();
+            const {  page, limit } = data;
+
+            const result = await this.orderService.adminPayouts( page, limit);
             return result
         } catch (error) {
             console.log("Error inn fetching the admin payouts")
