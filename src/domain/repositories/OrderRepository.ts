@@ -81,4 +81,31 @@ export class OrderRepository {
             throw new Error('Could not fetch payouts');
         }
     }
+    async getTutorPayoutsByMonth(tutorId: string) {
+        try {
+            const payoutsByMonth = await Order.aggregate([
+                {
+                    $match: {
+                        tutorId: tutorId, 
+                    },
+                },
+                {
+                    $group: {
+                        _id: { $month: "$createdAt" }, // Group by month
+                        totalPayout: { $sum: { $toDouble: "$tutorShare" } }, // Sum the tutorShare field for each month
+                    },
+                },
+                {
+                    $sort: { _id: 1 }, // Sort by month in ascending order
+                },
+            ]);
+    
+            console.log('Tutor payouts by month', payoutsByMonth);
+            return payoutsByMonth;
+        } catch (error) {
+            console.error('Error fetching tutor payouts by month:', error);
+            throw new Error('Could not fetch tutor payouts');
+        }
+    }
+    
 }

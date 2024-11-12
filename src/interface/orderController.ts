@@ -58,6 +58,14 @@ class OrderController {
             console.log("Error in fetching AdminPayoutsByMonth",error)
         }
     }
+    async TutorPayoutsByMonth(tutorId:string){
+        try {
+            const result = await this.orderService.tutorPayoutsByMonth(tutorId);
+            return result;
+        } catch (error) {
+            console.log("Error in fetching TutorPayoutsByMonth",error)
+        }
+    }
 }
 
 export const orderController = new OrderController();

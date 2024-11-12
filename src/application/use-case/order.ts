@@ -105,4 +105,12 @@ export class OrderService {
             console.log("Error in fetching AdminPayoutsByMonth  in orderService",error)
         }
     }
+    async tutorPayoutsByMonth(tutorId:string){
+        try {
+            const result = await this.orderRepo.getTutorPayoutsByMonth(tutorId);
+            return result
+        } catch (error) {
+            console.log("Error in fetching AdminPayoutsByMonth  in orderService",error)
+        }
+    }
 }

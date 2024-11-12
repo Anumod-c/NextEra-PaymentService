@@ -25,6 +25,10 @@ export default class MessageHandlers {
                 break;
             case 'AdminPayoutsByMonth':
                 response = await orderController.AdminPayoutsByMonth();
+                break;
+                case 'TutorPayoutsByMonth':
+                    response = await orderController.TutorPayoutsByMonth(data);
+                    break
         }
         await RabbitMQClient.produce(response, correlationId, replyTo)
     }
