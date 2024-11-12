@@ -1,5 +1,5 @@
 import { Channel,connect,Connection } from "amqplib";
-
+import rabbitMQLogger from "../../../logger/rabbitLogger";
 import RabbitMQConfig from "../config/rabbitMQ";
 import Consumer from "./consumer";
 import Producer from "./producer";
@@ -31,6 +31,8 @@ class RabbitMQClient{
         try{
             console.log('Connecting to Rabbitmq..');
             this.connection = await connect(RabbitMQConfig.rabbitMQ.url);
+            rabbitMQLogger.emit('connect', `Connected to ${RabbitMQConfig.rabbitMQ.url}`);
+
             console.log('line under connecting to rabbitmq');
             
             [this.produceChannel, this.consumerChannel] = await Promise.all([this.connection.createChannel(),this.connection.createChannel()]) ;
@@ -45,6 +47,8 @@ class RabbitMQClient{
             this.isInitialized = true
         
         }catch(error){
+            rabbitMQLogger.emit('disconnect', error);
+
             console.log("Rabbit error",error)
         }
     }
