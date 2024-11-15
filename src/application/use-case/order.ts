@@ -17,7 +17,7 @@ export class OrderService {
 
     async createStripeSession(orderData: IOrder) {
         try {
-            console.log('Reached use case for purchasing order');
+            console.log('Reached use case for purchasing order',orderData);
 
             // Create a Stripe Checkout session
             const session = await stripe.checkout.sessions.create({
@@ -41,7 +41,7 @@ export class OrderService {
                 success_url: `http://localhost:5173/success?session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `http://localhost:5173`,
             });
-            
+            console.log('sessionnnnnnnns',session)
             // Save the order in the database
            
             const priceAsNumber = parseFloat(orderData.discountPrice);
