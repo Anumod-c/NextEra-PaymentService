@@ -66,7 +66,7 @@ export class OrderRepository {
   async fetchAdminPayouts(page: number = 1, limit: number) {
     try {
       const skip = (page - 1) * limit;
-      const adminPayouts = await Order.find().skip(skip).limit(limit);
+      const adminPayouts = await Order.find().sort({createdAt:-1}).skip(skip).limit(limit);
       const totalCount = await Order.countDocuments();
       console.log("totalcount", totalCount);
 
